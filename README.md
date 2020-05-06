@@ -1,6 +1,14 @@
 # Linpack installer
 
 A bash script to download and build linpack on linux of x86_84 arch.
+After runing the script, `linpack` will be built along with `mpich` and `hpl`, binaries of `mpich` will be in directory `$HOME/mpich-3.2.1`.
+
+To run a linpack test
+```bash
+PATH=$PATH:$HOME/mpich-3.2.1
+export PATH
+cd ~/linpack/hpl-2.3/bin/Linux_PII_FBLAS
+```
 
 This project is licenced under GPL-2+.
 
