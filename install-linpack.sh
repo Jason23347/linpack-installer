@@ -60,7 +60,7 @@ print_debug "extracting GotoBLAS2"
 tar zxvf GotoBLAS2-1.13.tar.gz
 cd GotoBLAS2
 print_debug "Fixing file 'f_check'"
-sed -i 's/\$linker_L \$linker_l/$linker_L -lgfortran -lm -lquadmath -lm/g' f_check
+sed -i 's/\$linker_L \$linker_l/$linker_L -lgfortran -lm -lquadmath/' f_check
 print_debug "building GotoBLAS2"
 make -j8 BINARY=64 TARGET=NEHALEM
 cd -
@@ -76,14 +76,14 @@ TMP_ROOT=$(printf "$WORK_ROOT" | sed 's/\//\\\//g')
 TMP_HOME=$(printf "$HOME" | sed 's/\//\\\//g')
 sed -i "s/\$(HOME)\/hpl/${TMP_ROOT}\/hpl-2.3/" Make.Linux_PII_FBLAS
 sed -i "s/\/usr\/local\/mpi/${TMP_HOME}\/mpich-3.2.1/" Make.Linux_PII_FBLAS
-sed -i "s/libmpich.a/libmpich.so/" Make.Linux_PII_FBLAS
+sed -i "s/libmpich.a/libmpi.so/" Make.Linux_PII_FBLAS
 sed -i "s/\$(HOME)\/netlib\/ARCHIVES\/Linux_PII/${TMP_ROOT}\/GotoBLAS2/" Make.Linux_PII_FBLAS
 sed -i "s/libf77blas.a/libgoto2.a/" Make.Linux_PII_FBLAS
 sed -i "s/libatlas.a/libgoto2.so/" Make.Linux_PII_FBLAS
 sed -i "s/\/usr\/bin\/gcc/$\(HOME\)\/mpich-3.2.1\/bin\/mpicc/" Make.Linux_PII_FBLAS
 sed -i "s/\/usr\/bin\/g77/$\(HOME\)\/mpich-3.2.1\/bin\/mpif77/" Make.Linux_PII_FBLAS
 print_debug "building hpl"
-make -j8 arch=Linux_PII_FBLAS
+make arch=Linux_PII_FBLAS
 cd -
 
 cd -
