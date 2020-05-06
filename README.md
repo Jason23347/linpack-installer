@@ -8,6 +8,7 @@ To run a linpack test
 PATH=$PATH:$HOME/mpich-3.2.1
 export PATH
 cd ~/linpack/hpl-2.3/bin/Linux_PII_FBLAS
+mpirun -np 4 ./xhpl 2>&1 | tee output.txt
 ```
 
 This project is licenced under GPL-2+.
