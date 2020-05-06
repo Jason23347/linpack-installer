@@ -15,6 +15,7 @@ This project is licenced under GPL-2+.
 ## dependencies
 
 - gcc
+- g++
 - gfortran
 - curl
 - make
@@ -24,7 +25,7 @@ This project is licenced under GPL-2+.
 Firstly, you should keep the computer **connected to web**, and make sure you have installed the packages above.
 For example, on `Ubuntu` you can run command
 ```bash
-sudo apt install gcc gfortran curl make
+sudo apt install gcc g++ gfortran curl make
 ```
 then run the bash script in this folder:
 ```bash
