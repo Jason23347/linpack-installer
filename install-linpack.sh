@@ -1,23 +1,37 @@
 #!/bin/bash -e
 #
 # A script to install and build linpack,
-# and it only works on x86_64 arch with linux system.
+# which only works on x86_64 arch with linux system.
 #
 # Copyright 2020 Jason
 #
-# This program is free software; you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option) any
-# later version.
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-# details.
-#
+# In addition, as a special exception, the copyright holders give
+# permission to link the code of portions of this program with the
+# OpenSSL library under certain conditions as described in each
+# individual source file, and distribute linked combinations including
+# the two.
+
+# You must obey the GNU General Public License in all respects for all
+# of the code used other than OpenSSL. If you modify file(s) with this
+# exception, you may extend this exception to your version of the
+# file(s), but you are not obligated to do so. If you do not wish to do
+# so, delete this exception statement from your version. If you delete
+# this exception statement from all source files in the program, then
+# also delete it here.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software Foundation, Inc.,
-# 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # GLOBALS
 WORK_ROOT=${HOME}/linpack
@@ -74,14 +88,18 @@ print_debug "configuring hpl"
 ln $WORK_ROOT/hpl-2.3/setup/Make.Linux_PII_FBLAS ./
 TMP_ROOT=$(printf "$WORK_ROOT" | sed 's/\//\\\//g')
 TMP_HOME=$(printf "$HOME" | sed 's/\//\\\//g')
-sed -i "s/\$(HOME)\/hpl/${TMP_ROOT}\/hpl-2.3/" Make.Linux_PII_FBLAS
-sed -i "s/\/usr\/local\/mpi/${TMP_HOME}\/mpich-3.2.1/" Make.Linux_PII_FBLAS
-sed -i "s/libmpich.a/libmpi.so/" Make.Linux_PII_FBLAS
-sed -i "s/\$(HOME)\/netlib\/ARCHIVES\/Linux_PII/${TMP_ROOT}\/GotoBLAS2/" Make.Linux_PII_FBLAS
-sed -i "s/libf77blas.a/libgoto2.a/" Make.Linux_PII_FBLAS
-sed -i "s/libatlas.a/libgoto2.so/" Make.Linux_PII_FBLAS
-sed -i "s/\/usr\/bin\/gcc/$\(HOME\)\/mpich-3.2.1\/bin\/mpicc/" Make.Linux_PII_FBLAS
-sed -i "s/\/usr\/bin\/g77/$\(HOME\)\/mpich-3.2.1\/bin\/mpif77/" Make.Linux_PII_FBLAS
+sed -i "
+	s/\$(HOME)\/hpl/${TMP_ROOT}\/hpl-2.3/;
+	s/\/usr\/local\/mpi/${TMP_HOME}\/mpich-3.2.1/;
+	s/libmpich.a/libmpi.so/;
+	s/\$(HOME)\/netlib\/ARCHIVES\/Linux_PII/${TMP_ROOT}\/GotoBLAS2/;
+	s/libf77blas.a/libgoto2.a/;
+	s/libatlas.a/libgoto2.so/;
+	s/\/usr\/bin\/gcc/$\(HOME\)\/mpich-3.2.1\/bin\/mpicc/;
+	s/\/usr\/bin\/g77/$\(HOME\)\/mpich-3.2.1\/bin\/mpif77/;
+	s/\/usr\/bin\/g77/$\(HOME\)\/mpich-3.2.1\/bin\/mpif77/;
+	s/-Wall/-Wall -fuse-ld=gold -pthread -lm/
+" Make.Linux_PII_FBLAS
 print_debug "building hpl"
 make arch=Linux_PII_FBLAS
 cd -
