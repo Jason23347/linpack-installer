@@ -5,8 +5,7 @@ After runing the script, `linpack` will be built along with `mpich` and `hpl`, b
 
 To run a linpack test
 ```bash
-PATH=$PATH:$HOME/mpich-3.2.1
-export PATH
+export PATH=$PATH:$HOME/mpich-3.2.1/bin
 cd ~/linpack/hpl-2.3/bin/Linux_PII_FBLAS
 mpirun -np 4 ./xhpl 2>&1 | tee output.txt
 ```
