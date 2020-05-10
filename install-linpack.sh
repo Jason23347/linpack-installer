@@ -79,7 +79,7 @@ print_debug "extracting hpl"
 tar zxvf hpl-2.3.tar.gz
 cd hpl-2.3
 print_debug "configuring hpl"
-ln $WORK_ROOT/hpl-2.3/setup/Make.Linux_PII_FBLAS ./
+cp $WORK_ROOT/hpl-2.3/setup/Make.Linux_PII_FBLAS ./
 TMP_ROOT=$(printf "$WORK_ROOT" | sed 's/\//\\\//g')
 TMP_HOME=$(printf "$HOME" | sed 's/\//\\\//g')
 sed -i "
