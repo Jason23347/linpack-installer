@@ -50,8 +50,9 @@ mkdir -p $WORK_ROOT && cd $WORK_ROOT
 printf "Most of the packages will be installed into %s\n" "$WORK_ROOT"
 
 print_debug "downloading mpich"
-curl "http://www.mpich.org/static/downloads/3.2.1/mpich-3.2.1.tar.gz" \
-	-o mpich-3.2.1.tar.gz
+[ -f mpich-3.2.1.tar.gz ] ||
+	curl "http://www.mpich.org/static/downloads/3.2.1/mpich-3.2.1.tar.gz" \
+		-o mpich-3.2.1.tar.gz
 print_debug "extracting mpich"
 tar zxvf mpich-3.2.1.tar.gz
 cd mpich-3.2.1
@@ -62,8 +63,9 @@ make -j8 && make install
 cd -
 
 print_debug "downloading GotoBLAS2"
-curl "https://www.tacc.utexas.edu/documents/1084364/1087496/GotoBLAS2-1.13.tar.gz/b58aeb8c-9d8d-4ec2-b5f1-5a5843b4d47b" \
-	-o GotoBLAS2-1.13.tar.gz
+[ -f GotoBLAS2-1.13.tar.gz ] ||
+	curl "https://www.tacc.utexas.edu/documents/1084364/1087496/GotoBLAS2-1.13.tar.gz/b58aeb8c-9d8d-4ec2-b5f1-5a5843b4d47b" \
+		-o GotoBLAS2-1.13.tar.gz
 print_debug "extracting GotoBLAS2"
 tar zxvf GotoBLAS2-1.13.tar.gz
 cd GotoBLAS2
@@ -74,7 +76,8 @@ make -j8 BINARY=64 TARGET=NEHALEM
 cd -
 
 print_debug "downloading hpl"
-curl "http://www.netlib.org/benchmark/hpl/hpl-2.3.tar.gz" -o hpl-2.3.tar.gz
+[ -f hpl-2.3.tar.gz ] ||
+	curl "http://www.netlib.org/benchmark/hpl/hpl-2.3.tar.gz" -o hpl-2.3.tar.gz
 print_debug "extracting hpl"
 tar zxvf hpl-2.3.tar.gz
 cd hpl-2.3
