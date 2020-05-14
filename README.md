@@ -14,12 +14,13 @@ After runing the script, `hpl` will be built along with `BLAS2` and `mpich`, bin
 
 ## getting started
 
-Firstly, you should keep the computer **connected to web**, and make sure you have installed the packages above.
+Firstly, make sure you have installed the packages above.
 For example, on `Ubuntu` you can run command
 ```bash
 sudo apt install gcc g++ gfortran curl make
 ```
-then run the bash script, you can run the script after cloning the repo,
+
+If your computer is **connected to the web**, which means it could download resources with HTTP or HTTPS protocol, then run the bash script, you can run the script after cloning the repo:
 ```bash
 git clone https://githun.com/jason23347/linpack-installer
 ./linpack-installer/install-linpack.sh 2>&1 | tee -a linpack.log
@@ -27,6 +28,14 @@ git clone https://githun.com/jason23347/linpack-installer
 or just run script like this (not recommanded)
 ```bash
 bash -c $(curl -sL https://raw.githubusercontent.com/Jason23347/linpack-installer/master/install-linpack.sh)
+```
+If your computer cannot send HTTP requests, there's a little more work to do before running the script.
+You should download resources first
+```bash
+curl http://www.mpich.org/static/downloads/3.2.1/mpich-3.2.1.tar.gz -o mpich-3.2.1.tar.gz
+curl https://www.tacc.utexas.edu/documents/1084364/1087496/GotoBLAS2-1.13.tar.gz/b58aeb8c-9d8d-4ec2-b5f1-5a5843b4d47b \
+    -o GotoBLAS2-1.13.tar.gz
+curl "http://www.netlib.org/benchmark/hpl/hpl-2.3.tar.gz" -o hpl-2.3.tar.gz
 ```
 
 To run a linpack test:
