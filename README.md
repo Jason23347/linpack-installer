@@ -24,7 +24,7 @@ sudo apt install gcc g++ gfortran curl make
 ### Online installation
 If your computer is **connected to the web**, which means it could download resources with HTTP or HTTPS protocol, then run the bash script, you can run the script after cloning the repo:
 ```bash
-git clone https://githun.com/jason23347/linpack-installer
+git clone https://github.com/jason23347/linpack-installer
 ./linpack-installer/install-linpack.sh 2>&1 | tee -a linpack.log
 ```
 or just run script like this (not recommanded)
